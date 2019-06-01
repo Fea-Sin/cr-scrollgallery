@@ -32,7 +32,7 @@ class ScrollGalleryShow extends PureComponent {
       barTabH,
     })
     const listElement = this.listBox.children
-    const listElementArr = [...listElement]
+    const listElementArr = Array.from(listElement)
     const elementMessage = []
     // 修正第一次检测
     elementMessage.push(0)
@@ -46,9 +46,8 @@ class ScrollGalleryShow extends PureComponent {
     })
     this.setState({
       listElementMessage: elementMessage,
-      // listElementArr,
     }, () => {
-      // console.log(this.state.listElementMessage)
+      this.setScrollTop(this.state.tabSelect)
     })
   }
   componentDidUpdate(prevProps, prevState) {
@@ -59,6 +58,10 @@ class ScrollGalleryShow extends PureComponent {
     this.setState({
       tabSelect: val
     })
+    this.setScrollTop(val)
+  }
+
+  setScrollTop = (val) => {
     const gTopH = this.state.scrollBarH
     const elementTop = this.state.listElementMessage[val]
     this.galleryBox.scrollTop = gTopH + elementTop
@@ -94,9 +97,6 @@ class ScrollGalleryShow extends PureComponent {
         let tabSelect
         if (scrollTop < listElementMessage[i]+gTopH-interval) {
           i === 0 ? tabSelect = i : tabSelect = i - 1
-          // if ( (listElementMessage[i]+gTopH - scrollTop) < galleryBoxH/2 ) {
-          //   tabSelect = i
-          // }
           this.setState({
             tabSelect
           })
@@ -129,43 +129,39 @@ class ScrollGalleryShow extends PureComponent {
   }
 
   render () {
-    const { barTab, tabSelect } = this.props
+    const { barTab, prefixCls } = this.props
     const tab = barTab && barTab.length > 0 && (
       barTab.map((item, index) => {
         const tabClassName = classNames({
-          [styles.list]: true,
-          [styles.select]: this.state.tabSelect === index,
+          [`${prefixCls}-bar-list`]: true,
+          [`${prefixCls}-bar-box-select`]: this.state.tabSelect === index,
         })
         return (
           <div className={tabClassName} key={index} onClick={e => this.handleTabClick(e, index)}>{item}</div>
         )
       })
     )
-    const barTabClass = classNames({
-      [styles.bar]: true,
-      [styles.barFix]: this.state.barFix,
-    })
     
     return (
-      <div className={styles.galleryOutBox}>
-        <div className={styles.galleryBox} ref={ galleryBox => this.galleryBox = galleryBox } onScroll={this.handleGalleryScroll}>
-          <div className={styles.scrollGallery} ref={ gallery => this.gallery = gallery }>
-            <div className={styles.top} ref={gTop => this.gTop = gTop}>
+      <div className={`${prefixCls}-out-box`}>
+        <div className={`${prefixCls}-box`} ref={ galleryBox => this.galleryBox = galleryBox } onScroll={this.handleGalleryScroll}>
+          <div className={`${prefixCls}`} ref={ gallery => this.gallery = gallery }>
+            <div className={`${prefixCls}-top`} ref={gTop => this.gTop = gTop}>
               {this.props.galleryTop}
             </div>
-            <div className={styles.bar} ref={barTab => this.barTab = barTab }>
-              <div className={styles.box}>
+            <div className={`${prefixCls}-bar`} ref={barTab => this.barTab = barTab }>
+              <div className={`${prefixCls}-bar-box`}>
                 {tab}
               </div>
             </div>
-            <div className={styles.listBox} ref={listBox => this.listBox = listBox}>
+            <div className={`${prefixCls}-listBox`} ref={listBox => this.listBox = listBox}>
               {this.props.galleryElements}
             </div>
           </div>
         </div>
-        <div className={styles.barFixBox} ref={barTabTwo => this.barTabTwo = barTabTwo }>
-          <div className={styles.bar}>
-            <div className={styles.box}>
+        <div className={`${prefixCls}-out-box-barFixBox`} ref={barTabTwo => this.barTabTwo = barTabTwo }>
+          <div className={`${prefixCls}-out-box-bar`}>
+            <div className={`${prefixCls}-out-box-bar-box`}>
               {tab}
             </div>
           </div>
@@ -179,9 +175,11 @@ ScrollGalleryShow.propTypes = {
   barTab: PropTypes.array,
   tabSelect: PropTypes.number,
   galleryTop: PropTypes.element,
-  galleryElements: PropTypes.arrayOf(PropTypes.element)
+  galleryElements: PropTypes.arrayOf(PropTypes.element),
+  prefixCls: PropTypes.string,
 }
 ScrollGalleryShow.defaultProps = {
-
+  tabSelect: 0,
+  prefixCls: 'cr-scrollgallery'
 }
 export default ScrollGalleryShow

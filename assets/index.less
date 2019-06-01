@@ -1,4 +1,4 @@
-@crScrollGallery: cr-scroll-gallery;
+@crScrollGallery: cr-scrollgallery;
 
 @import '../src/utils/utils.less';
 
@@ -46,9 +46,9 @@
         color: #3E7AFA;
         border-color: #3E7AFA;
       }
-      &-select::after {
-        background-color: #3E7AFA;
-        width: 100%;
+      &-select:after {
+        background-color: #3E7AFA !important;
+        width: 100% !important;
       }
     }
 
@@ -71,7 +71,7 @@
         content: '';
         display: block;
         position: absolute;
-        width: 10px;
+        width: 0;
         height: 2px;
         left: 0;
         bottom: 0;
