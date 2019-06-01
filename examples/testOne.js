@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
-import MindTree from 'cr-scrollgallery'
+import ScrollGallery from 'cr-scrollgallery'
 import '../assets/index.less';
 
 const reactContainer = document.getElementById('__react-content');
