@@ -1,0 +1,7 @@
+# History
+----
+
+## 1.0.0 / 2019-06-01
+
+cr-scrollgallery is start
+
