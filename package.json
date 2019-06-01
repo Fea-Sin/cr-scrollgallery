@@ -1,0 +1,53 @@
+{
+  "name": "cr-scrollgallery",
+  "version": "1.0.0",
+  "description": "a react component for element scroll and select the item ",
+  "scripts": {
+    "start": "rc-tools run server",
+    "build": "rc-tools run build",
+    "lint": "rc-tools run lint",
+    "compile": "rc-tools run compile --babel-runtime",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "feasin",
+  "keywords": [],
+  "config": {
+    "port": 8020
+  },
+  "files": [
+    "es",
+    "lib",
+    "assets/*.css"
+  ],
+  "main": "./lib/index",
+  "module": "./es/index",
+  "devDependencies": {
+    "coveralls": "^3.0.2",
+    "enzyme": "^3.0.0",
+    "enzyme-adapter-react-16": "^1.0.2",
+    "enzyme-to-json": "^3.0.1",
+    "jest": "^21.0.0",
+    "pre-commit": "1.x",
+    "rc-tools": "7.x",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0",
+    "react-test-renderer": "^16.8.0",
+    "rmc-tools": "^0.0.4"
+  },
+  "dependencies": {
+    "babel-runtime": "6.x",
+    "classnames": "2.x",
+    "prop-types": "^15.5.6",
+    "rc-animate": "2.x",
+    "rc-util": "^4.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fea-Sin/cr-scrollgallery.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Fea-Sin/cr-scrollgallery/issues"
+  },
+  "homepage": "https://github.com/Fea-Sin/cr-scrollgallery#readme"
+}
