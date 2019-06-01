@@ -21,13 +21,11 @@ import 'cr-scrollgallery/assets/index.css'
 ## API
 name | type | description
 -----|------|------------
-title|string|组件标题
-tree|array|传入组件树数据，类似[{name: 'leaf-one', value: '001'}, {name: 'leaf-two', value: '002'}]
-bgColor|string|组件背景颜色
-mode   |string|组件展开的方式（'bottomCenter', 'topRight', 'topLeft', 'topRight', 'bottomRight'）
-treeChange|func|组件展开收起 function(val) {}; 组件展开val为true,收起为false
-leafClick|func|点击组件叶子事件 function(event, val) {}; val为叶子数据
-treeBoxWidth|number|组件树叶子部分的宽度，一般不需要设置，默认值为300
+barTab|array|标题tab
+tabSelect|number|默认选中的tab,并且滚动到相应位置
+galleryTop|react node|tab bar上部内容
+galleryElements|array of react node|tab对应的页面内容
+
 ## Development
 
 ```
