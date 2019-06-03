@@ -12,7 +12,7 @@ class App extends PureComponent {
   
   render () {
     const galleryTop = (
-      <div style={{border: '1px solid red', height: 300, overflowY: 'auto'}}></div>
+      <div style={{border: '1px solid red', height: 300}}></div>
     )
     const arrayElement = () => {
       const one = (
