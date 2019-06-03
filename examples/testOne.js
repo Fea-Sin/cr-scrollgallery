@@ -42,7 +42,7 @@ class App extends PureComponent {
         <div style={{height: 600, border: '10px solid #21c8be'}}>
           <ScrollGallery
             barTab={['tab一', 'tab二', 'tab三']}
-            tabSelect={3}
+            tabSelect={1}
             galleryTop={galleryTop}
             galleryElements={arrayElement()}
           />

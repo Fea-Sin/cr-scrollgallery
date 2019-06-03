@@ -47,7 +47,9 @@ class ScrollGalleryShow extends PureComponent {
     this.setState({
       listElementMessage: elementMessage,
     }, () => {
-      this.setScrollTop(this.state.tabSelect)
+      if (this.state.tabSelect > 0) {
+        this.setScrollTop(this.state.tabSelect)
+      }
     })
   }
   componentDidUpdate(prevProps, prevState) {
