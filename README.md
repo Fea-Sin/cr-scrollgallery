@@ -1,5 +1,4 @@
 # cr-scrollgallery
----
 
 react component
 
@@ -73,11 +72,12 @@ barTab|array|标题tab
 tabSelect|number|默认选中的tab,并且滚动到相应位置
 galleryTop|react node|tab bar上部内容
 galleryElements|array of react node|tab对应的页面内容
+barMinWidth|string/number|设置tabBar最小宽度，合适的值可以使tabBar居中 (例如：`500`,`500px`,`85%`)
 
 ## Development
 
 ```
-npm install
+cnpm install
 npm start
 ```
 

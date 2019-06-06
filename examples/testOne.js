@@ -45,6 +45,7 @@ class App extends PureComponent {
             tabSelect={1}
             galleryTop={galleryTop}
             galleryElements={arrayElement()}
+            barMinWidth={500}
           />
         </div>
       </div>

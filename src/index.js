@@ -131,7 +131,7 @@ class ScrollGalleryShow extends PureComponent {
   }
 
   render () {
-    const { barTab, prefixCls } = this.props
+    const { barTab, prefixCls, barMinWidth } = this.props
     const tab = barTab && barTab.length > 0 && (
       barTab.map((item, index) => {
         const tabClassName = classNames({
@@ -152,7 +152,7 @@ class ScrollGalleryShow extends PureComponent {
               {this.props.galleryTop}
             </div>
             <div className={`${prefixCls}-bar`} ref={barTab => this.barTab = barTab }>
-              <div className={`${prefixCls}-bar-box`}>
+              <div className={`${prefixCls}-bar-box`} style={{ minWidth: barMinWidth }}>
                 {tab}
               </div>
             </div>
@@ -163,7 +163,7 @@ class ScrollGalleryShow extends PureComponent {
         </div>
         <div className={`${prefixCls}-out-box-barFixBox`} ref={barTabTwo => this.barTabTwo = barTabTwo }>
           <div className={`${prefixCls}-out-box-bar`}>
-            <div className={`${prefixCls}-out-box-bar-box`}>
+            <div className={`${prefixCls}-out-box-bar-box`} style={{ minWidth: barMinWidth }}>
               {tab}
             </div>
           </div>
@@ -179,9 +179,11 @@ ScrollGalleryShow.propTypes = {
   galleryTop: PropTypes.element,
   galleryElements: PropTypes.arrayOf(PropTypes.element),
   prefixCls: PropTypes.string,
+  barMinWidth: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ])
 }
 ScrollGalleryShow.defaultProps = {
   tabSelect: 0,
-  prefixCls: 'cr-scrollgallery'
+  prefixCls: 'cr-scrollgallery',
+  barMinWidth: '90%',
 }
 export default ScrollGalleryShow
