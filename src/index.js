@@ -18,6 +18,7 @@ class ScrollGalleryShow extends PureComponent {
   }
 
   componentDidMount() {
+    const { prefixCls } = this.props
     const barTabRect = this.galleryBox.getBoundingClientRect()
     const elementW = OuiDom.outerWidth(this.gallery)
     const gTopH = OuiDom.outerHeight(this.gTop)
@@ -31,7 +32,7 @@ class ScrollGalleryShow extends PureComponent {
       scrollBarH,
       barTabH,
     })
-    const listElement = this.listBox.children
+    const listElement = this.listBox.querySelectorAll(`.${prefixCls}-child`)
     const listElementArr = Array.from(listElement)
     const elementMessage = []
     console.log('需要滚动的子元素', listElementArr);
@@ -132,6 +133,24 @@ class ScrollGalleryShow extends PureComponent {
     })
   }
 
+  // 给需要滚动的子元素加key
+  setKeyChildren = () => {
+    const { galleryElements, prefixCls } = this.props
+    // console.log('galleryElements---', galleryElements)
+    if (galleryElements ) {
+      return galleryElements.map((item, index) => {
+        return (
+          <div className={`${prefixCls}-child`} key={index}>
+            {item}
+          </div>
+        )
+      })
+    } else {
+      return (<div>暂无数据或者galleryElements所传递的不是react node 数组</div>)
+    }
+
+  }
+
   render () {
     const { barTab, prefixCls, barMinWidth } = this.props
     const tab = barTab && barTab.length > 0 && (
@@ -159,7 +178,8 @@ class ScrollGalleryShow extends PureComponent {
               </div>
             </div>
             <div className={`${prefixCls}-listBox`} ref={listBox => this.listBox = listBox}>
-              {this.props.galleryElements}
+              {/* {this.props.galleryElements} */}
+              {this.setKeyChildren()}
             </div>
           </div>
         </div>

@@ -11,3 +11,6 @@ cr-scrollgallery is start
 ## 1.0.2 / 2019-06-06
 增加barMinWidth property,传入合适的值可以使tabBar居中
 
+## 1.0.4 / 2019-06-09
+滚动子元素统一增加外包div元素,并且增加key
+
