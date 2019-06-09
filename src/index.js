@@ -34,6 +34,7 @@ class ScrollGalleryShow extends PureComponent {
     const listElement = this.listBox.children
     const listElementArr = Array.from(listElement)
     const elementMessage = []
+    console.log('需要滚动的子元素', listElementArr);
     // 修正第一次检测
     elementMessage.push(0)
     listElementArr.forEach((ele, index, arr) => {
@@ -47,6 +48,7 @@ class ScrollGalleryShow extends PureComponent {
     this.setState({
       listElementMessage: elementMessage,
     }, () => {
+      console.log('子元素高度累加', this.state.listElementMessage)
       if (this.state.tabSelect > 0) {
         this.setScrollTop(this.state.tabSelect)
       }
