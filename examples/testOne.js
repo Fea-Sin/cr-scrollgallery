@@ -10,6 +10,22 @@ const bodyContainer = document.getElementsByTagName('body')
 bodyContainer[0].style.padding = '10px'
 
 class App extends PureComponent {
+
+  componentDidMount() {
+    const enterDom = document.getElementById('enter')
+    setTimeout(() => {
+      const helloDom = document.createElement('div')
+      helloDom.style.height = 300 + 'px'
+      helloDom.style.border = '1px solid red'
+      enterDom.appendChild(helloDom)
+    }, 1000)
+  }
+  handleClick = () => {
+    console.log(this.gallery)
+    this.gallery.setInitScrollNum()
+    console.log('click 0000')
+
+  }
   
   render () {
     const galleryTop = (
@@ -28,7 +44,7 @@ class App extends PureComponent {
         </div>
       )
       const two = (
-        <div key='two'>
+        <div key='two' id='enter'>
           <div style={{ height: 60}}>tab二</div>
           <div style={{border: '1px solid green', height: 450}}></div>
         </div>
@@ -197,8 +213,10 @@ class App extends PureComponent {
 
     return (
       <div>
+        <div style={{width: 100, height: 100, border: '1px solid red'}} onClick={this.handleClick}></div>
         <div style={{height: 600, border: '10px solid #21c8be'}}>
           <ScrollGallery
+            ref={gallery => this.gallery = gallery }
             barTab={['tab一', 'tab二', 'tab三']}
             tabSelect={1}
             galleryTop={galleryTop}

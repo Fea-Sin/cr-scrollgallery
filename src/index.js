@@ -2,6 +2,7 @@ import React, { PureComponent, Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import OuiDom from './utils/ouiDomUtils'
+import isEqual from 'lodash/isEqual'
 
 class ScrollGalleryShow extends PureComponent {
 
@@ -32,6 +33,10 @@ class ScrollGalleryShow extends PureComponent {
       scrollBarH,
       barTabH,
     })
+    this.setInitScrollNum()
+  }
+  setInitScrollNum = () => {
+    const { prefixCls } = this.props
     const listElement = this.listBox.querySelectorAll(`.${prefixCls}-child`)
     const listElementArr = Array.from(listElement)
     const elementMessage = []
@@ -53,10 +58,13 @@ class ScrollGalleryShow extends PureComponent {
       if (this.state.tabSelect > 0) {
         this.setScrollTop(this.state.tabSelect)
       }
-    })
+    })    
   }
   componentDidUpdate(prevProps, prevState) {
-    // console.log('component up date', prevState)
+    if (!isEqual(this.props, prevProps)) {
+      console.log('component is update')
+      this.setInitScrollNum()
+    }
   }
 
   handleTabClick = (e, val) => {
