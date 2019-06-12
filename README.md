@@ -58,11 +58,21 @@ import 'cr-scrollgallery/assets/index.css'
 
 ```
 
-## 注意
+## 注意01
 如果使用了cssModule，作为样式的使用方式，在引入css时应特别注意
 以And Design Pro使用为例，在对应的页面less中引入css。注意包名前面的波浪线
 ```less
 @import '~cr-scrollgallery/assets/index.css';
+```
+
+## 注意02
+如果组件传入的是异步元素，因为组件在`componentDidMount`时计算元素的高度导致不准确，因此组件增加了修补措施，在异步完成是调用方法`this.gallery.setInitScrollNum()`
+如何使用：
+```js
+promise.then(() => {
+  this.gallery.setInitScrollNum()
+})
+<ScrollGallery ref={gallery => this.gallery = gallery }></ScrollGallery>
 ```
 
 ## API

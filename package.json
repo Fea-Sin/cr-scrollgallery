@@ -1,6 +1,6 @@
 {
   "name": "cr-scrollgallery",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "a react component for element scroll and select the item ",
   "scripts": {
     "start": "rc-tools run server",
