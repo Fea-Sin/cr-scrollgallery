@@ -22,8 +22,8 @@ class ScrollGalleryShow extends PureComponent {
     const { prefixCls } = this.props
     const barTabRect = this.galleryBox.getBoundingClientRect()
     const elementW = OuiDom.outerWidth(this.gallery)
-    const gTopH = OuiDom.outerHeight(this.gTop)
-    const barTabH = OuiDom.outerHeight(this.barTab)
+    const gTopH = OuiDom.outerHeightWithMargin(this.gTop)
+    const barTabH = OuiDom.outerHeightWithMargin(this.barTab)
     const scrollBarH = gTopH
     OuiDom.setStyles(this.barTabTwo, {
       ['display']: 'none',
@@ -44,10 +44,10 @@ class ScrollGalleryShow extends PureComponent {
     // 修正第一次检测
     elementMessage.push(0)
     listElementArr.forEach((ele, index, arr) => {
-      let height = OuiDom.outerHeight(ele)
+      let height = OuiDom.outerHeightWithMargin(ele)
       let sumH = 0
       for (let i=0; i<=index; i++) {
-        sumH += OuiDom.outerHeight(arr[i])
+        sumH += OuiDom.outerHeightWithMargin(arr[i])
       }
       elementMessage.push(sumH)
     })
@@ -102,7 +102,7 @@ class ScrollGalleryShow extends PureComponent {
 
     // 提前多少距离选中tab
     const interval = 50
-    const galleryBoxH = OuiDom.outerHeight(this.galleryBox)
+    const galleryBoxH = OuiDom.outerHeightWithMargin(this.galleryBox)
     
     for (let i=0; i<length; i++) {
       if (scrollUp) {
