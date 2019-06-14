@@ -78,7 +78,7 @@ class ScrollGalleryShow extends PureComponent {
     if (!isEqual(this.props, prevProps)) {
       this.setInitScrollNum()
       this.setIndicatorH()
-      if (!isEqual(this.state.indicatorH, prevState.indicatorH)) {
+      if (isEqual(this.state.indicatorH, prevState.indicatorH)) {
         this.setState({
           label: false
         })
