@@ -15,6 +15,7 @@ cnpm install --save cr-scrollgallery
 import ScrollGallery from 'cr-scrollgallery'
 import 'cr-scrollgallery/assets/index.css'
 // 注意在使用的时候不能忘记引入css
+// 如果使用cssModule，不需要在此处引入css，而是在对应的less或scss文件引入，查看注意01
   render () {
     const galleryTop = (
       <div style={{border: '1px solid red', height: 300}}></div>
@@ -67,6 +68,7 @@ import 'cr-scrollgallery/assets/index.css'
 
 ## 注意02
 如果组件传入的是异步元素，因为组件在`componentDidMount`时计算元素的高度导致不准确，因此组件增加了修补措施，在异步完成是调用方法`this.gallery.setInitScrollNum()`
+2019-06-14已修复，一般状态下不需要手动触发修补措施
 如何使用：
 ```js
 promise.then(() => {

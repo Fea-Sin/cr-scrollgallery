@@ -15,6 +15,7 @@ class ScrollGalleryShow extends PureComponent {
       barTabH: 0,
       listElementMessage: [],
       scrollTop: 0,
+      label: true,
     }
   }
 
@@ -25,6 +26,7 @@ class ScrollGalleryShow extends PureComponent {
     const gTopH = OuiDom.outerHeightWithMargin(this.gTop)
     const barTabH = OuiDom.outerHeightWithMargin(this.barTab)
     const scrollBarH = gTopH
+    // console.log('顶部高度', gTopH)
     OuiDom.setStyles(this.barTabTwo, {
       ['display']: 'none',
       ['width']: elementW + 'px',
@@ -34,13 +36,24 @@ class ScrollGalleryShow extends PureComponent {
       barTabH,
     })
     this.setInitScrollNum()
+    this.setIndicatorH()
   }
+
+  setIndicatorH = () => {
+    // 设置传入元素高度指纹
+    const length = this.state.listElementMessage.length
+    const indicatorH = this.state.scrollBarH + this.state.listElementMessage[length-1]
+    this.setState({
+      indicatorH
+    })
+  }
+
   setInitScrollNum = () => {
     const { prefixCls } = this.props
     const listElement = this.listBox.querySelectorAll(`.${prefixCls}-child`)
     const listElementArr = Array.from(listElement)
     const elementMessage = []
-    console.log('需要滚动的子元素', listElementArr);
+    // console.log('需要滚动的子元素', listElementArr);
     // 修正第一次检测
     elementMessage.push(0)
     listElementArr.forEach((ele, index, arr) => {
@@ -48,22 +61,32 @@ class ScrollGalleryShow extends PureComponent {
       let sumH = 0
       for (let i=0; i<=index; i++) {
         sumH += OuiDom.outerHeightWithMargin(arr[i])
+        // console.log('元素高度', i, OuiDom.outerHeightWithMargin(arr[i]) )
       }
       elementMessage.push(sumH)
     })
     this.setState({
       listElementMessage: elementMessage,
     }, () => {
-      console.log('子元素高度累加', this.state.listElementMessage)
-      if (this.state.tabSelect > 0) {
+      // console.log('子元素高度累加', this.state.listElementMessage)
+      if (this.state.tabSelect > 0 && this.state.label) {
         this.setScrollTop(this.state.tabSelect)
       }
-    })    
+    })   
   }
   componentDidUpdate(prevProps, prevState) {
     if (!isEqual(this.props, prevProps)) {
-      console.log('component is update')
       this.setInitScrollNum()
+      this.setIndicatorH()
+      if (!isEqual(this.state.indicatorH, prevState.indicatorH)) {
+        this.setState({
+          label: false
+        })
+      } else {
+        this.setState({
+          label: true
+        }) 
+      }   
     }
   }
 
@@ -114,19 +137,16 @@ class ScrollGalleryShow extends PureComponent {
             tabSelect
           })
           break
-        }        
+        }  
 
       } else {
-        // console.log('往下滚动')
+        // console.log('往下滚动', i)
         let tabSelect
         let lastTabSelect
         if (scrollTop < listElementMessage[i]+gTopH+interval) {
+          // console.log('scrollTop',scrollTop, '判断条件', listElementMessage[i]+gTopH+interval)
           i === 0 ? lastTabSelect = i : lastTabSelect = i - 1
-          if ( (listElementMessage[lastTabSelect]+gTopH - scrollTop) >  galleryBoxH/2) {
-            tabSelect = lastTabSelect
-          } else {
-            tabSelect = i
-          }
+          tabSelect = lastTabSelect
           this.setState({
             tabSelect
           })
@@ -186,7 +206,6 @@ class ScrollGalleryShow extends PureComponent {
               </div>
             </div>
             <div className={`${prefixCls}-listBox`} ref={listBox => this.listBox = listBox}>
-              {/* {this.props.galleryElements} */}
               {this.setKeyChildren()}
             </div>
           </div>
