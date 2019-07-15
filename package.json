@@ -27,7 +27,6 @@
     "enzyme-adapter-react-16": "^1.0.2",
     "enzyme-to-json": "^3.0.1",
     "jest": "^21.0.0",
-    "pre-commit": "1.x",
     "rc-tools": "7.x",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
