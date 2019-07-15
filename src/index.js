@@ -129,7 +129,7 @@ class ScrollGalleryShow extends PureComponent {
     
     for (let i=0; i<length; i++) {
       if (scrollUp) {
-        // console.log('往上滚动')
+        // console.log('页面往上滑动')
         let tabSelect
         if (scrollTop < listElementMessage[i]+gTopH-interval) {
           i === 0 ? tabSelect = i : tabSelect = i - 1
@@ -140,10 +140,11 @@ class ScrollGalleryShow extends PureComponent {
         }  
 
       } else {
-        // console.log('往下滚动', i)
+        // console.log('页面向上滚动的距离', scrollTop)
+        // console.log('页面往下滑动', i, listElementMessage[i])
         let tabSelect
         let lastTabSelect
-        if (scrollTop < listElementMessage[i]+gTopH+interval) {
+        if (scrollTop < listElementMessage[i]+gTopH-interval) {
           // console.log('scrollTop',scrollTop, '判断条件', listElementMessage[i]+gTopH+interval)
           i === 0 ? lastTabSelect = i : lastTabSelect = i - 1
           tabSelect = lastTabSelect

@@ -218,7 +218,7 @@ class App extends PureComponent {
           <ScrollGallery
             ref={gallery => this.gallery = gallery }
             barTab={['tab一', 'tab二', 'tab三']}
-            tabSelect={1}
+            // tabSelect={1}
             galleryTop={galleryTop}
             galleryElements={arrayElement()}
             barMinWidth={500}
