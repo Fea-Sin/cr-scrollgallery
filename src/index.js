@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import OuiDom from './utils/ouiDomUtils'
 import isEqual from 'lodash/isEqual'
+import PerfectScrollbar from 'react-perfect-scrollbar'
 
 class ScrollGalleryShow extends PureComponent {
 
@@ -181,7 +182,7 @@ class ScrollGalleryShow extends PureComponent {
   }
 
   render () {
-    const { barTab, prefixCls, barMinWidth } = this.props
+    const { barTab, prefixCls, barMinWidth, outBoxHeight } = this.props
     const tab = barTab && barTab.length > 0 && (
       barTab.map((item, index) => {
         const tabClassName = classNames({
@@ -195,30 +196,32 @@ class ScrollGalleryShow extends PureComponent {
     )
     
     return (
-      <div className={`${prefixCls}-out-box`}>
-        <div className={`${prefixCls}-box`} ref={ galleryBox => this.galleryBox = galleryBox } onScroll={this.handleGalleryScroll}>
-          <div className={`${prefixCls}`} ref={ gallery => this.gallery = gallery }>
-            <div className={`${prefixCls}-top`} ref={gTop => this.gTop = gTop}>
-              {this.props.galleryTop}
+      <PerfectScrollbar style={{height: outBoxHeight}}>
+        <div className={`${prefixCls}-out-box`}>
+          <div className={`${prefixCls}-box`} ref={ galleryBox => this.galleryBox = galleryBox } onScroll={this.handleGalleryScroll}>
+            <div className={`${prefixCls}`} ref={ gallery => this.gallery = gallery }>
+              <div className={`${prefixCls}-top`} ref={gTop => this.gTop = gTop}>
+                {this.props.galleryTop}
+              </div>
+              <div className={`${prefixCls}-bar`} ref={barTab => this.barTab = barTab }>
+                <div className={`${prefixCls}-bar-box`} style={{ minWidth: barMinWidth }}>
+                  {tab}
+                </div>
+              </div>
+              <div className={`${prefixCls}-listBox`} ref={listBox => this.listBox = listBox}>
+                {this.setKeyChildren()}
+              </div>
             </div>
-            <div className={`${prefixCls}-bar`} ref={barTab => this.barTab = barTab }>
-              <div className={`${prefixCls}-bar-box`} style={{ minWidth: barMinWidth }}>
+          </div>
+          <div className={`${prefixCls}-out-box-barFixBox`} ref={barTabTwo => this.barTabTwo = barTabTwo }>
+            <div className={`${prefixCls}-out-box-bar`}>
+              <div className={`${prefixCls}-out-box-bar-box`} style={{ minWidth: barMinWidth }}>
                 {tab}
               </div>
             </div>
-            <div className={`${prefixCls}-listBox`} ref={listBox => this.listBox = listBox}>
-              {this.setKeyChildren()}
-            </div>
           </div>
         </div>
-        <div className={`${prefixCls}-out-box-barFixBox`} ref={barTabTwo => this.barTabTwo = barTabTwo }>
-          <div className={`${prefixCls}-out-box-bar`}>
-            <div className={`${prefixCls}-out-box-bar-box`} style={{ minWidth: barMinWidth }}>
-              {tab}
-            </div>
-          </div>
-        </div>
-      </div>
+      </PerfectScrollbar>
     )
   }
 }
@@ -229,11 +232,13 @@ ScrollGalleryShow.propTypes = {
   galleryTop: PropTypes.element,
   galleryElements: PropTypes.arrayOf(PropTypes.element),
   prefixCls: PropTypes.string,
-  barMinWidth: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ])
+  barMinWidth: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]),
+  outBoxHeight: PropTypes.number,
 }
 ScrollGalleryShow.defaultProps = {
   tabSelect: 0,
   prefixCls: 'cr-scrollgallery',
   barMinWidth: '90%',
+  outBoxHeight: 600,
 }
 export default ScrollGalleryShow

@@ -213,15 +213,16 @@ class App extends PureComponent {
 
     return (
       <div>
-        <div style={{width: 100, height: 100, border: '1px solid red'}} onClick={this.handleClick}></div>
-        <div style={{height: 600, border: '10px solid #21c8be'}}>
+        {/* <div style={{width: 100, height: 100, border: '1px solid red'}} onClick={this.handleClick}></div> */}
+        <div style={{height: 400, border: '10px solid #21c8be'}}>
           <ScrollGallery
-            ref={gallery => this.gallery = gallery }
-            barTab={['tab一', 'tab二', 'tab三']}
-            // tabSelect={1}
-            galleryTop={galleryTop}
-            galleryElements={arrayElement()}
-            barMinWidth={500}
+              ref={gallery => this.gallery = gallery }
+              barTab={['tab一', 'tab二', 'tab三']}
+              // tabSelect={1}
+              galleryTop={galleryTop}
+              galleryElements={arrayElement()}
+              barMinWidth={500}
+              outBoxHeight={400}
           />
         </div>
       </div>
